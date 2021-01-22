@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h2 class="title">Hello world!</h2>
+    <router-view></router-view>
+    <tab-bar-context/>
   </div>
 </template>
 <script>
+import TabBarContext from 'components/context/TabBarContext.vue'; // 底部的导航
+
 export default {
   name: "App",
+  components: {
+    TabBarContext
+  }
 };
 </script>
 <style>
-.title{
-  font-size: 40px;
-  text-align: center;
-  margin-top: 100px;
-}
+  @import 'assets/css/base';
 </style>
