@@ -1,4 +1,4 @@
-# super-clothes
+# Super-clothes
 
 ## Project setup
 ```
@@ -21,6 +21,7 @@ npm run lint
 ```
 ### About me
 >  ......
+> 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### If you want to know more for my project, please click the link:
+See [My link for the project](./LOG.md).
