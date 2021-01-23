@@ -11,7 +11,7 @@ export default {
 </script>
 <style>
 .tabbar{
-  position:absolute;
+  position:fixed;
   left:0;
   right:0;
   bottom:0;
@@ -19,7 +19,7 @@ export default {
   flex-direction:row;
   background-color: #f6f6f6;
   justify-content: space-evenly;
-  box-shadow: 0 -1px 2px rgba(100, 100, 100, .8);
+  box-shadow: 0 -1px 1px rgba(100, 100, 100, .5);
   width:100vw;
 }
 </style>

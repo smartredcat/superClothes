@@ -6,3 +6,11 @@ export function RequestMultiData(){
     url: '/home/multidata'
   })
 }
+export function RequestGoodsData(type, page){
+  return RequestAxios({
+    url:'/home/data',
+    params : {
+      type, page
+    }
+  })
+}

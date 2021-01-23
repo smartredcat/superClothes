@@ -27,7 +27,20 @@
     it and search the vue@devtool to add my plugin, Finally, I succeeded. 
     
 ##### Day-3:
-  - 
+  - SlideShow emm.. I have a little failure. 
+  - HomeRecommend@vue is ok.
+  - HomePopular@vue is ok.
+  - TabControl@vue  is a banner, just send a title object.
+  - position: sticky;  The css is amazing !
+    .isFixed {
+        /* 当滚动44px  定位就变成fixed */
+        position: sticky;
+        top: 44px;
+      }
+
+##### Day-4: 
+  -  I think the SliderShow is important and must be understood.
+  
 
 
 

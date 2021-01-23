@@ -1,12 +1,12 @@
 import axios from 'axios'
+import api from './api'
 
 export function RequestAxios(config){
   const instance =  axios.create({
     // 基本配置
-    baseURL:'http://123.207.32.32:8000',
+    baseURL:api,
     timeout:5000
   })
-
   // 请求拦截器
   instance.interceptors.request.use(config =>{
     return config
