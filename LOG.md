@@ -40,7 +40,9 @@
 
 ##### Day-4: 
   -  I think the SliderShow is important and must be understood.
+  -  Goodslist to display !
+  -  Look the better-scroll [better-scroll](https://github.com/ustbhuangyi/better-scroll/blob/master/README_zh-CN.md)
+  -  About the home, I think we can finish it tomorrow !
   
-
 
 
