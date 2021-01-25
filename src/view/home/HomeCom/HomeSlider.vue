@@ -3,7 +3,7 @@
     <slider-show>
       <slider-show-item v-for="item in bannerList" :key="item">
         <a :href="item.link">
-          <img :src="item.image" alt="">
+          <img :src="item.image" alt="" @load="SlideLoad">
         </a>
       </slider-show-item>
     </slider-show>
@@ -24,7 +24,20 @@ export default {
         return []
       }
     }
-  }
+  },
+  data(){
+    return{
+      flag:false
+    }
+  },
+  methods:{
+    SlideLoad(){
+      if(!this.flag){
+        this.$emit('SlideLoad')
+      }
+        this.flag = true
+    }
+  },
 }
 </script>
 

@@ -46,3 +46,14 @@
   
 
 
+##### Day-5:
+  -  The Better-scorll plugin has a err, because of the scrollHeight computed error,
+     if our image item running, The height is higher, so we should refresh the scrollHeight,
+     but vue@3 remove the $bus and $on, we mush install other plugin, 
+     [About the mitt, just the vue@2 $bus(eventBus)](https://www.cnblogs.com/sx00/p/13985486.html)
+  -  事件总线改掉了， 通过事件总线实现更远的跨组件传播， 从而修复不能拖动的bug
+  -  防抖函数， 处理调用频繁的代码
+  -  状态栏的吸顶效果， 直接设置fixed样式不行， 用了第二个状态栏来显示隐藏
+  -  滚动状态的保留， 用上了vue3的 keep-alive 改了很多
+  -  修复了切换路由， wrapper的内容高度被更改200， 将绝对定位去除，重新计算了父容器的高度，
+  

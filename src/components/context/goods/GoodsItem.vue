@@ -1,14 +1,14 @@
 <template>
   <!-- 一个个的商品 -->
   <div class="goods-item">
-    <a :href="goodsItem.link">
-      <img :src="goodsItem.show.img" alt=""/>
-    </a>
+    <div @click="goDetail">
+      <img :src="goodsItem.show.img" alt="" @load="imgLoad"/>
     <div class="info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ '￥' +goodsItem.price }}</span>
       <img src="~assets/image/common/love.png" alt="" />
       <span class="collage">{{ goodsItem.cfav }}</span>
+    </div>
     </div>
   </div>
 </template>
@@ -24,6 +24,19 @@ export default {
       },
     },
   },
+  methods:{
+    imgLoad(){
+      this.$bus.$emit('imgLoad')
+    },
+    goDetail(){
+      this.$router.push({
+        name:"Detail",
+        query:{
+          iid:this.goodsItem.iid
+        }
+      })
+    }
+  }
 };
 </script>
 

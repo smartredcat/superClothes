@@ -3,7 +3,7 @@ const Home = () => import('view/home/Home.vue')
 const Class = () => import('view/class/Class.vue')
 const Shop = () => import('view/shop/Shop.vue')
 const Me = () => import('view/me/Me.vue')
-
+const Detail = ()=> import('view/detail/Detail')
 const routes = [
   {
     path:'',
@@ -14,7 +14,8 @@ const routes = [
     name:"Home",
     component: Home,
     meta: {
-      title:"首页"
+      title:"首页",
+      keepAlive:true,  // alive 
     }
   },
   {
@@ -39,6 +40,14 @@ const routes = [
     component:Me,
     meta: {
       title:"我的"
+    }
+  },
+  {
+    path:"/detail",
+    name:'Detail',
+    component:Detail,
+    meta: {
+      title:'详情'
     }
   }
 ]

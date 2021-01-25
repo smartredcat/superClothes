@@ -61,6 +61,7 @@ export default {
     // 下拉刷新
     this.scroll.on('pullingDown', ()=>{
       this.$emit('pullingDown')
+      // 监听一次必须手动关闭 不然下次调用不成功
       this.scroll.finishPullDown()
     })
     // 上拉刷新
@@ -72,11 +73,15 @@ export default {
   methods: {
     // 向外暴露接口
     scrollTo(x, y, timer=300){
-      this.scroll.scrollTo(x, y, timer)
+      this.scroll && this.scroll.scrollTo(x, y, timer)
     },
-    refresh(){
-      this.scroll.refresh()
-    }  
+    // 刷新 重新计算高度
+    refresh(){      
+      this.scroll && this.scroll.refresh()
+    },
+    getScorllY(){
+      return this.scroll ? this.scroll.y : 0
+    }
   }
 };
 </script>
