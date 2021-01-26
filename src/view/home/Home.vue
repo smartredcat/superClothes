@@ -13,8 +13,6 @@
       class="wrapper"
       ref="wrapper"
       :probe-type="3"
-      :pull-down-refresh="true"
-      :pull-upLoad="true"
       @scrollContent="scrollContent"
       @pullingDown="pullingDown"
       @pullingUp="pullingUp"

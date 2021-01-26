@@ -25,16 +25,6 @@ export default {
       // 是否实时监听
       type:Number,
       default:0
-    },
-    pullDownRefresh:{
-      // 是否监听下拉刷新
-      type:Boolean,
-      default: false
-    },
-    pullUpLoad:{
-      // 是否监听上拉刷新
-      type:Boolean,
-      default:false
     }
   },
   mounted() {
@@ -44,8 +34,8 @@ export default {
     BScroll.use(Pullup)
     this.scroll = new BScroll('#wrapper', {
       probeType:this.probeType,
-      pullDownRefresh: this.pullDownRefresh,
-      pullUpLoad:this.pullUpLoad,
+      pullDownRefresh: true,
+      pullUpLoad:true,
       click: true,
       bindToTarget: true,
       scrollX: true,

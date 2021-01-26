@@ -3,7 +3,7 @@
     <!-- 有点难理解 -->
     <router-view v-slot="{ Component }">
     <!-- 缓存页面 -->
-    <keep-alive :include="$store.state.keepLiveRoute">
+    <keep-alive include="Home" exclude="Detail">
       <component :is="Component" />
     </keep-alive>
   </router-view>

@@ -7,7 +7,8 @@
       </template>
       <!-- 中间 -->
       <template #center>
-          <tab-control :title="detailTitle" @tabClick="tabClick" />
+          <tab-control :title="detailTitle"/>
+          <!-- @tabClick="tabClick"  -->
       </template>
     </nav-bar>
   </div>
@@ -33,11 +34,11 @@ export default {
     };
   },
   methods: {
-    tabClick(item) {
-      // 状态栏的事件 具体显示哪个文字
-      const index = item[0];
-      console.log(index);
-    },
+    // tabClick(item) {
+    //   // 状态栏的事件 具体显示哪个文字
+    //   const index = item[0];
+    //   console.log(index);
+    // },
     backTo(){
       // 返回之前页面      
       this.$router.back();

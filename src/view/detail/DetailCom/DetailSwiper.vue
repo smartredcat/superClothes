@@ -20,6 +20,11 @@ export default {
     SliderShow,
     SliderShowItem,
   },
+  data() {
+    return{
+      iid:0
+    }
+  },
   props: {
     topImageList: {
       type: Array,
