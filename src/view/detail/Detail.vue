@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <!-- 导航 -->
-    <detail-navbar class="navbar" />
+    <detail-navbar class="navbar" @tabClick="tabClick" ref="detailNav"/>
     <better-scroll
       class="wrapper"
       ref="detailS"
@@ -113,7 +113,7 @@ export default {
         ruleTable: res.result.itemParams.rule.tables,
         ruleDes: res.result.itemParams.rule.disclaimer,
       };
-      this.goodsRate = res.result.rate.list;
+      this.goodsRate = res.result.rate.list ? res.result.rate.list : [];
     });
     // 请求推荐商品
     this.RequestGoodsData("new");
@@ -123,12 +123,12 @@ export default {
   mounted() {
     // 推荐商品加载完成 重新计算高度
     const refresh = unShake(this.$refs.detailS.refresh, 200);
-    this.$bus.$on("imgLoad", () => {
+    this.$bus.$on("DetailImgLoad", () => {
       refresh();
       // 当推荐商品加载完成 获取各位位置的高度
-      this.paramTop = this.$refs.param.$el.offsetTop;
-      this.rateTop = this.$refs.rate.$el.offsetTop;
-      this.pushTop = this.$refs.pushgoods.$el.offsetTop;
+      this.paramTop = this.$refs.param.$el ? this.$refs.param.$el.offsetTop : 0;
+      this.rateTop = this.$refs.rate.$el ?  this.$refs.rate.$el.offsetTop : 0;
+      this.pushTop = this.$refs.pushgoods.$el ? this.$refs.pushgoods.$el.offsetTop : 0 ;
     });
   },
   methods: {
@@ -148,20 +148,30 @@ export default {
       // 显示返回顶部的图标
       this.isShowBackTo = y > 1400
       // 监听滚动更改状态栏
-      if(y > this.paramTop){
+      if(y >= this.paramTop){
         this.currentIndex = 2
-      }else if (y > this.rateTop){
+      }else if (y >= this.rateTop){
         this.currentIndex = 3
-      }else if (y > this.pushTop){
+      }else if (y >= this.pushTop){
         this.currentIndex = 4
       }else {
         this.currentIndex = 1
       }
-      console.log(this.currentIndex)
+      // 随着滚动更换状态
+      this.$refs.detailNav.currentIndex = this.currentIndex;
     },
     // 返回顶部
     backTop(){
       this.$refs.detailS.scroll.scrollTo(0, 0, 800);
+    },
+    // 监听状态栏的变化
+    tabClick(index){
+      switch (index){
+        case 1:this.$refs.detailS.scroll.scrollTo(0, 0, 500); break;
+        case 2: this.$refs.detailS.scroll.scrollTo(0, -this.paramTop, 500); break;
+        case 3: this.$refs.detailS.scroll.scrollTo(0, -this.rateTop, 500); break;
+        case 4: this.$refs.detailS.scroll.scrollTo(0, -this.pushTop, 500); break;
+      }
     }
   },
 };

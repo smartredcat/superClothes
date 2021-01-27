@@ -26,7 +26,14 @@ export default {
   },
   methods:{
     imgLoad(){
-      this.$bus.$emit('imgLoad')
+      // 更加路由的不同， 分别的来发送不同的load事件
+      if(this.$route.path === '/home'){
+        this.$bus.$emit('HomeImgLoad')
+        // console.log('home load')
+      }else if(this.$route.path === '/detail'){
+        this.$bus.$emit('DetailImgLoad')
+        // console.log('detail load')
+      }
     },
     goDetail(){
       this.$router.push({

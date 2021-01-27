@@ -93,12 +93,12 @@ export default {
   },
   // keep-alive 生命周期函数
   activated() {
-    console.log(this.saveY)
+    // console.log(this.saveY)
     this.$refs.wrapper.scrollTo(0, this.saveY, 0)
     this.$refs.wrapper.refresh();
   },
   deactivated(){
-    console.log(this.saveY)
+    // console.log(this.saveY)
     this.saveY = this.$refs.wrapper.getScorllY();
   },
   methods: {
@@ -173,7 +173,7 @@ export default {
     },
     // 监听轮播图是否加载完
     SlideLoad(){
-      this.TabControlTop = this.$refs.tabControl1.$el.offsetTop;
+      this.TabControlTop = this.$refs.tabControl1 ?  this.$refs.tabControl1.$el.offsetTop : 0;
     }
   },
   mounted() {
@@ -183,7 +183,7 @@ export default {
     // }, 800);
     // 监听事件总线
     let refresh = unShake(this.$refs.wrapper.refresh, 200)
-    this.$bus.$on('imgLoad', ()=>{
+    this.$bus.$on('HomeImgLoad', ()=>{
       // 这里需要来一个防抖函数， 不然执行太频繁了
       refresh();
     })
