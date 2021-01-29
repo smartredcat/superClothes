@@ -1,7 +1,8 @@
 <template>
   <div class="detail">
     <!-- 导航 -->
-    <detail-navbar class="navbar" @tabClick="tabClick" ref="detailNav"/>
+    <detail-navbar class="navbar" @tabChange="tabChange" ref="detailNav" />    
+    
     <better-scroll
       class="wrapper"
       ref="detailS"
@@ -17,14 +18,16 @@
       <!-- 商品信息更多 -->
       <detail-goods-info :goodsInfos="goodsInfos" @imgLoad="imgLoad" />
       <!-- 商品参数信息 -->
-      <detail-goods-params :goodsParams="goodsParams"  ref="param"/>
+      <detail-goods-params :goodsParams="goodsParams" ref="param" />
       <!-- 商品评论 -->
-      <detail-common :goodsRate="goodsRate"  ref="rate"/>
+      <detail-common :goodsRate="goodsRate" ref="rate" />
       <!-- 推荐商品 -->
-      <goods :goodsType="goodsList" ref="pushgoods"/>
+      <goods :goodsType="goodsList" ref="pushgoods" />
     </better-scroll>
-      <!-- 返回顶部 -->
+    <!-- 返回顶部 -->
     <back-to @click="backTop" v-show="isShowBackTo" />
+    <!-- 底部导航 -->
+    <detail-bottom-bar class="bottomBar" @addCart="addCart"/>
   </div>
 </template>
 
@@ -33,6 +36,8 @@ import { RequestDetail } from "network/DetailRequest";
 import { RequestGoodsData } from "network/HomeRequest.js";
 
 import { unShake } from "common/utils";
+import {Backto} from 'common/mixin'
+
 
 import DetailNavbar from "./DetailCom/DetailNavbar";
 import DetailSwiper from "./DetailCom/DetailSwiper";
@@ -41,10 +46,10 @@ import DetailShop from "./DetailCom/DetailShop";
 import DetailGoodsInfo from "./DetailCom/DetailGoodsInfo";
 import DetailGoodsParams from "./DetailCom/DetailGoodsParams";
 import DetailCommon from "./DetailCom/DetailCommon";
+import DetailBottomBar from  './DetailCom/DetailBottomBar'
 
 import BetterScroll from "components/common/scroll/BetterScroll";
 import Goods from "components/context/goods/Goods";
-import BackTo from "components/context/backTo/BackTo";
 
 export default {
   name: "Detail",
@@ -54,12 +59,13 @@ export default {
     DetailInfo,
     DetailShop,
     Goods,
-    BackTo,
     BetterScroll,
     DetailGoodsInfo,
     DetailGoodsParams,
     DetailCommon,
+    DetailBottomBar,
   },
+  mixins: [Backto],
   data() {
     return {
       iid: 0,
@@ -71,11 +77,11 @@ export default {
       goodsInfos: {}, // 商品信息
       goodsParams: {}, // 商品参数
       goodsRate: [], // 商品评论
-      isShowBackTo:false, // 是否显示返回
-      paramTop:0, // 参数高度
-      rateTop:0, // 评论高度
-      pushTop:0, // 推荐商品高度
-      currentIndex:1 // 当前状态
+      paramTop: 0, // 参数高度
+      rateTop: 0, // 评论高度
+      pushTop: 0, // 推荐商品高度
+      currentIndex: 1, // 当前状态
+      addCartNow:{}, //  加入当前商品
     };
   },
   created() {
@@ -125,10 +131,6 @@ export default {
     const refresh = unShake(this.$refs.detailS.refresh, 200);
     this.$bus.$on("DetailImgLoad", () => {
       refresh();
-      // 当推荐商品加载完成 获取各位位置的高度
-      this.paramTop = this.$refs.param.$el ? this.$refs.param.$el.offsetTop : 0;
-      this.rateTop = this.$refs.rate.$el ?  this.$refs.rate.$el.offsetTop : 0;
-      this.pushTop = this.$refs.pushgoods.$el ? this.$refs.pushgoods.$el.offsetTop : 0 ;
     });
   },
   methods: {
@@ -141,43 +143,75 @@ export default {
     // 图片加载完成 重新计算高度
     imgLoad() {
       this.$refs.detailS.refresh();
+      //  当商品详情加载完成 获取各位位置的高度
+      //  如果在 mounted 里面 虽然挂在上去了  但是还未渲染 el是null
+      this.paramTop = this.$refs.param.$el.offsetTop;
+      this.rateTop = this.$refs.rate.$el.offsetTop;
+      this.pushTop = this.$refs.pushgoods.$el.offsetTop;
     },
     // 监听滚动高度
-    scrollContent(position){
-      const y = -position.y
+    scrollContent(position) {
+      const y = -position.y;
       // 显示返回顶部的图标
-      this.isShowBackTo = y > 1400
-      // 监听滚动更改状态栏
-      if(y >= this.paramTop){
-        this.currentIndex = 2
-      }else if (y >= this.rateTop){
-        this.currentIndex = 3
-      }else if (y >= this.pushTop){
-        this.currentIndex = 4
-      }else {
-        this.currentIndex = 1
+      this.isShowBackTo = y > 1400;
+      // 监听滚动更改状态栏  根据每个offsetTop高度 来进行判断 更改currentIndex
+
+      if (y >= 0 && y < this.paramTop) {
+        this.currentIndex = 1;
+      } else if (y >= this.paramTop && y < this.rateTop) {
+        this.currentIndex = 2;
+      } else if (y >= this.rateTop && y < this.pushTop) {
+        this.currentIndex = 3;
+      } else if (y >= this.pushTop) {
+        this.currentIndex = 4;
       }
+
       // 随着滚动更换状态
       this.$refs.detailNav.currentIndex = this.currentIndex;
+
+      // console.log(this.currentIndex)
     },
     // 返回顶部
-    backTop(){
+    backTop() {
       this.$refs.detailS.scroll.scrollTo(0, 0, 800);
     },
     // 监听状态栏的变化
-    tabClick(index){
-      switch (index){
-        case 1:this.$refs.detailS.scroll.scrollTo(0, 0, 500); break;
-        case 2: this.$refs.detailS.scroll.scrollTo(0, -this.paramTop, 500); break;
-        case 3: this.$refs.detailS.scroll.scrollTo(0, -this.rateTop, 500); break;
-        case 4: this.$refs.detailS.scroll.scrollTo(0, -this.pushTop, 500); break;
+    tabChange(index) {
+      switch (index) {
+        case 1:
+          this.$refs.detailS.scroll.scrollTo(0, 0, 500);
+          break;
+        case 2:
+          this.$refs.detailS.scroll.scrollTo(0, -this.paramTop, 500);
+          break;
+        case 3:
+          this.$refs.detailS.scroll.scrollTo(0, -this.rateTop, 500);
+          break;
+        case 4:
+          this.$refs.detailS.scroll.scrollTo(0, -this.pushTop, 500);
+          break;
       }
+    },
+    // 监听点击购物车
+    addCart(){
+      // 填入单个商品数据
+      this.addCartNow = {
+        image: this.topImage[0],
+        iid: this.iid,
+        name: this.detailInfo.deTitle,
+        des: this.goodsInfos.desc,
+        nowPrice: this.detailInfo.lowNowPrice,
+        count: 1,
+      }
+      // 传到vuex中
+      this.$store.dispatch('addProduce', this.addCartNow);
+
     }
   },
 };
 </script>
 
-<style>
+<style scoped>
 .detail {
   position: relative;
   z-index: 9;
@@ -192,5 +226,13 @@ export default {
 .wrapper {
   overflow: hidden;
   height: calc(100% - 44px);
+}
+.bottomBar{
+  height: 49px;
+  background-color: #fff;
+  position:fixed;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
 }
 </style>

@@ -11,15 +11,18 @@
       </table>
     </div>
     <div class="rule">
-       <table class="ruleTb">
         <tr><th>{{goodsParams.ruleKey}}</th></tr>
         <tr><th>{{goodsParams.ruleDes}}</th></tr>
-        <div v-for="item in this.goodsParams.ruleTable"
-          :key="item">
-          <tr v-for='a in item' :key="a">
-              <td v-for="b in a" :key="b">{{b}}</td>
+       <table class="ruleTb" v-for="table in goodsParams.ruleTable"
+       :key="table">
+        <tr v-for="itemX in table"
+          :key="itemX">
+            <td v-for="itemY in itemX"
+            :key="itemY">
+            {{itemY}}
+            </td>
           </tr>
-        </div>
+        
       </table>
     </div> 
 
@@ -37,21 +40,10 @@ export default {
       }
     }
   },
-  computed:{
-    ruleTable(){
-      let ls = this.goodsParams.ruleTable[0];
-      if(this.goodsParams.ruleTable.length >= 2){
-        for (const iterator of this.goodsParams.ruleTable[1]) {
-            ls.push(iterator)
-        }
-      }
-      return ls;
-    }
-  }
 }
 </script>
 
-<style>
+<style scoped>
 .info, .rule{
   padding:20px;
 }

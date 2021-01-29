@@ -13,7 +13,7 @@
             v-for="item in detailTitle"
             :key="item.id"
             :class="{ active: currentIndex === item.id }"
-            @click="tabClick(item.id)"
+            @click="tabChange(item.id)"
           >
             <span>{{ item.name }}</span>
           </div>
@@ -43,10 +43,10 @@ export default {
     };
   },
   methods: {
-    tabClick(index) {
+    tabChange(index) {
       // 状态改变
       this.currentIndex = index;
-      this.$emit("tabClick", index);
+      this.$emit("tabChange", index);
     },
     backTo() {
       // 返回之前页面

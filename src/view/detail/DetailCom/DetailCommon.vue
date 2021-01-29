@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .item{
   padding:10px;
   border-bottom: solid 1px gray;

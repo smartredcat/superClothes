@@ -9,7 +9,7 @@ export default {
   name:'TabBar'
 }
 </script>
-<style>
+<style scoped>
 .tabbar{
   position:fixed;
   left:0;

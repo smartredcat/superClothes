@@ -42,25 +42,25 @@ import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/context/TabControl";
 import BetterScroll from "components/common/scroll/BetterScroll";
 import Goods from "components/context/goods/Goods";
-import BackTo from "components/context/backTo/BackTo";
 
 import HomeSlider from "./HomeCom/HomeSlider";
 import HomeRecommend from "./HomeCom/HomeRecommend";
 import HomePopular from "./HomeCom/HomePopular";
 
 import {unShake} from 'common/utils'
+import {Backto} from 'common/mixin'
 export default {
   name: "Home",
   components: {
     NavBar,
     TabControl,
     Goods,
-    BackTo,
     BetterScroll,
     HomeSlider,
     HomeRecommend,
     HomePopular,
   },
+  mixins: [Backto],
   data() {
     return {
       banner: [],
@@ -77,7 +77,6 @@ export default {
       },
       returnList: null,
       currentType: "pop", // 当前的分类
-      isShowBackTo: false,
       TabControlTop:0,// 状态栏距离top的高度
       isShowTabControl:false,
       saveY:0

@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .goodsInfos {
   width: 100%;
 }

@@ -9,7 +9,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .slider{
     width: 100%;
     flex-shrink: 0;

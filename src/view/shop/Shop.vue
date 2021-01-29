@@ -1,15 +1,72 @@
 <template>
-  <div>
-    我是购物
+  <div class="shop">
+    <!-- 导航 -->
+    <shop-nav-bar class="nav-bar" />
+    <!-- 滚轮 -->
+      <better-scroll class="wrapper">   
+        <shop-list-item
+          v-for="item in cartProduct"
+          :key="item"
+          :ItemProduct="item"
+          @scClick="scClick"
+        />
+      </better-scroll>
+      <!-- 底部计算 -->
+      <shop-bottom-bar  class="bottom"/>
   </div>
 </template>
-
+i
 <script>
+import ShopNavBar from "./shopCom/ShopNavBar";
+import ShopListItem from "./shopCom/ShopListItem";
+import ShopBottomBar from './shopCom/ShopBottomBar'
+import BetterScroll from "components/common/scroll/BetterScroll";
 export default {
-  name:'Shop'
-}
+  name: "Shop",
+  components: {
+    ShopNavBar,
+    ShopListItem,
+    ShopBottomBar,
+    BetterScroll,
+  },
+  computed: {
+    cartProduct() {
+      // 收藏夹产品
+      return this.$store.state.nowCartProduct
+        ? this.$store.state.nowCartProduct
+        : [];
+    },
+  },
+  methods: {
+    scClick(Index){
+      this.$store.commit('SwicthActive', Index);
+    }
+  } 
+};
 </script>
 
-<style>
-
+<style scoped>
+.nav-bar {
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  background: #fff;
+  z-index: 10;
+}
+.shop{
+  height:100vh;
+}
+.wrapper{
+  height: calc(100% - 44px - 49px - 40px);
+  overflow: hidden;
+  position: relative;
+  top:44px;
+}
+.bottom{
+  background-color: #eee;
+  height: 40px;
+  position: relative;
+  top: 47px;
+}
 </style>

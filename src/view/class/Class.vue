@@ -1,28 +1,6 @@
 <template>
   <div class="wrapper">
     <div class="content">
-      <ul>
-        <li>我是内容1</li>
-        <li>我是内容2</li>
-        <li>我是内容3</li>
-        <li>我是内容4</li>
-        <li>我是内容5</li>
-        <li>我是内容6</li>
-        <li>我是内容7</li>
-        <li>我是内容8</li>
-        <li>我是内容9</li>
-        <li>我是内容10</li>
-        <li>我是内容1</li>
-        <li>我是内容2</li>
-        <li>我是内容3</li>
-        <li>我是内容4</li>
-        <li>我是内容5</li>
-        <li>我是内容6</li>
-        <li>我是内容7</li>
-        <li>我是内容8</li>
-        <li>我是内容9</li>
-        <li>我是内容10</li>
-      </ul>
     </div>
   </div>
 </template>
