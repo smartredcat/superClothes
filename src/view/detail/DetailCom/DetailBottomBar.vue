@@ -27,36 +27,40 @@
         <span class="buy">立即购买</span>
       </div>
     </div>
-    <!-- 点击触发状态显示 收藏  加入购物车 -->
-    <div class="status" v-if="isShow">
-      <span>{{ message }}</span>
-    </div>
+    <toast ref="toast"/>
   </div>
 </template>
 
 <script>
+import Toast from 'components/common/toast/Toast'
 export default {
   name: "DetailBottomBar",
+  components: {
+    Toast
+  },
   data() {
     return {
-      message: "", // 状态信息
       isSave: false, //   是否收藏
-      isShow: false, // 状态信息是否显示
+      msg: "",
     };
   },
   methods: {
     switchSave() {
       // 收藏商品
       this.isSave = !this.isSave;
-      this.message = "已收藏 √ ";
-      this.setShow();
+      this.msg = this.isSave ? '已收藏' : '取消收藏';
+      // this.message = "已收藏 √ ";
+      // this.setShow();
+      this.$refs.toast.show(this.msg);
     },
     addCart(){
       // 加入购物车商品
-      this.message = "已加入 √ "
-      this.setShow();
+      // this.message = "已加入 √ "
+      // this.setShow();
       // 发射出去
       this.$emit('addCart')
+      this.$refs.toast.show("已加入");
+
     },
     setShow() {
       // 延迟一秒消失
@@ -115,18 +119,5 @@ export default {
   display: block;
   padding: 15px;
   border-top-right-radius: 10px;
-}
-.status {
-  height: 40px;
-  width: 80px;
-  text-align: center;
-  font-size: 16px;
-  color: var(--color-tint);
-  position: fixed;
-  top: 200px;
-  left: 150px;
-}
-.status span {
-  line-height: 40px;
 }
 </style>

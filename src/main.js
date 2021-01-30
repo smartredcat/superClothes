@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Bus from './mitt'
+// import Toast from './components/common/toast/index'
 
 const app = createApp(App)
 app.use(store).use(router).mount('#app')

@@ -28,9 +28,6 @@ export default  {
       state.nowCartProduct.map((item) => {
         return item.isCancel = true;
       })
-    }
-    
-      
+    }      
   }
-   
 }
