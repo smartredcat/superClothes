@@ -5,9 +5,12 @@
     </div>
     <slot name="indicator">
     </slot>
+    <!-- 下面的小圆点 -->
     <div class="indicator">
       <slot name="indicator" v-if="showIndicator && slideCount>1">
-        <div v-for="index in slideCount" class="indi-item" :class="{active: index === currentIndex-1}" :key="index"></div>
+        <div v-for="index in slideCount" class="indi-item" 
+        :class="{active: index === currentIndex-1}"
+         :key="index"></div>
       </slot>
     </div>
   </div>
@@ -121,6 +124,7 @@
           let cloneLast = slidesEls[this.slideCount - 1].cloneNode(true);
           swiperEl.insertBefore(cloneLast, slidesEls[0]);
           swiperEl.appendChild(cloneFirst);
+          //  swiperE1 拿到的是父容器的轮播对象
           this.totalWidth = swiperEl.offsetWidth;
           this.swiperStyle = swiperEl.style;
         }
@@ -153,9 +157,9 @@
         // 2.判断最终的距离
         if (this.distance === 0) {
           return
-        } else if (this.distance > 0 && currentMove > this.totalWidth * this.moveRatio) { // 右边移动超过0.5
+        } else if (this.distance > 0 && currentMove > this.totalWidth * this.moveRatio) { // 右边移动超过0.25
           this.currentIndex--
-        } else if (this.distance < 0 && currentMove > this.totalWidth * this.moveRatio) { // 向左移动超过0.5
+        } else if (this.distance < 0 && currentMove > this.totalWidth * this.moveRatio) { // 向左移动超过0.25
           this.currentIndex++
         }
         // 3.移动到正确的位置

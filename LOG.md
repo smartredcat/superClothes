@@ -76,4 +76,14 @@
   - 明天结束这个项目， 关于我的， 分类， 在后面进行扩展，将其搭建完整.
 
   
-  
+#### Day----
+  - 终于把这些都搞完了， 
+  - vue基础
+  - vue复杂
+  - vue@cli
+  - vue@router
+  - vue@vuex
+  - axios
+  - toast
+  - better-scorll
+  - 以及这个项目 superShop

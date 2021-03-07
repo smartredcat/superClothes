@@ -51,7 +51,7 @@ export default {
   opacity: 0.6;
 }
 .active img{
-  transition: transform 2s;
+  transition: transform 2s ease;
   transform: scale(1.2, 1.2);
 }
 </style>

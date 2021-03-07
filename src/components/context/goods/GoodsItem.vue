@@ -33,6 +33,8 @@ export default {
       }else if(this.$route.path === '/detail'){
         this.$bus.$emit('DetailImgLoad')
         // console.log('detail load')
+      }else if(this.$route.path === '/class'){
+        this.$bus.$emit('ClassImgLoad')
       }
     },
     goDetail(){

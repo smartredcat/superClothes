@@ -66,19 +66,24 @@ export default {
         this.msg = "数量为 0";
       } else {
         this.msg = "正在为你结算...";
+        // setTimeout(() => {
+        // 计算  暂时发送到me页面
+        // 显示状态信息
+
+        // this.$router.push({
+        //   name: "Me",
+        //   query: {
+        //     totalCount: this.totalCount,
+        //     totalPrice: this.totalPrice,
+        //   },
+        // });
+        // }, 1000);
+        this.$refs.toast.show(this.msg, 2000);
         setTimeout(() => {
-          // 计算  暂时发送到me页面
-          this.$router.push({
-            name: "Me",
-            query: {
-              totalCount: this.totalCount,
-              totalPrice: this.totalPrice,
-            },
-          });
-        }, 1200);
+          this.msg = `商品一共有: ${this.totalCount} \n 商品一共价格: ${this.totalPrice} `;
+          this.$refs.toast.show(this.msg);
+        }, 1400);
       }
-      // 显示状态信息
-      this.$refs.toast.show(this.msg);
     },
   },
 };

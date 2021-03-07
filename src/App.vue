@@ -6,8 +6,11 @@
     <keep-alive include="Home" exclude="Detail">
       <component :is="Component" />
     </keep-alive>
-  </router-view>
+    </router-view>
 
+    <!-- <keep-alive include="Home">
+      <router-view></router-view>
+    </keep-alive> -->
 
     <!-- <router-view></router-view> -->
     <tab-bar-context/>

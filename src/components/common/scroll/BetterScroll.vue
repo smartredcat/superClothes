@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" id="wrapper" >
+  <div class="wrapper">
     <div class="content">
       <!-- 预留的空间 -->
       <slot></slot>
@@ -32,7 +32,7 @@ export default {
     BScroll.use(Movable)
     BScroll.use(PullDown)
     BScroll.use(Pullup)
-    this.scroll = new BScroll('#wrapper', {
+    this.scroll = new BScroll('.wrapper', {
       probeType:this.probeType,
       pullDownRefresh: true,
       pullUpLoad:true,

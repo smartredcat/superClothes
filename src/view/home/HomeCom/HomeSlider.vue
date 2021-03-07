@@ -4,7 +4,7 @@
       <slider-show-item v-for="item in bannerList" :key="item">
         <a :href="item.link">
           <img :src="item.image" alt="" @load="SlideLoad">
-        </a>
+        </a>          
       </slider-show-item>
     </slider-show>
   </div>

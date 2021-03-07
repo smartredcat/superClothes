@@ -1,6 +1,6 @@
 <template>
   <!-- 点击触发状态 toast -->
-  <div class="status" v-if="isShow">
+  <div class="status" v-show="isShow">
     <span class="a">{{ a }}</span>
     <span>{{ message }}</span>
   </div>

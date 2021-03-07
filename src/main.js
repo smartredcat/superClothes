@@ -8,4 +8,4 @@ import Bus from './mitt'
 const app = createApp(App)
 app.use(store).use(router).mount('#app')
 // 使用插件 模拟数据总线挂载
-app.config.globalProperties.$bus = Bus;
+app.config.globalProperties.$bus = Bus
