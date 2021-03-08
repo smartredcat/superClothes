@@ -1,5 +1,8 @@
 # Super-clothes
 
+## View Product 
+[预览地址:](./dist/index.html)
+
 ## Project setup
 ```
 npm install
